@@ -1,0 +1,21 @@
+name: CD
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - README.md
+
+env:
+  CARGO_TERM_COLOR: always
+  CARGO_REGISTRIES_CRATES_IO_PROTOCOL: sparse
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: shuttle-hq/deploy-action@main
+      with:
+        deploy-key: ${{ secrets.SHUTTLE_API_KEY }}
