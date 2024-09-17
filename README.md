@@ -33,5 +33,5 @@ renderers! {
   - the URL must be to the repo of the markdown implementation
 
 5. Submit a pull request!
-6. Once approved and deployed, go to <https://markdown-dingus.shuttleapp.rs/registry">
+6. Once approved and deployed, go to <https://markdown-dingus.shuttleapp.rs/registry>
 7. Submit your crate's new entry in the registry to <https://github.com/babelmark/babelmark-registry>
