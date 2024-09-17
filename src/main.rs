@@ -8,57 +8,57 @@ const CARGO_TOML: &str = include_str!("../Cargo.toml");
 
 #[derive(Deserialize)]
 struct CargoToml {
-    dependencies: Table,
+	dependencies: Table,
 }
 
 static VERSIONS: LazyLock<HashMap<String, String>> = LazyLock::new(|| {
-    let CargoToml { dependencies } = toml::from_str(CARGO_TOML).unwrap();
-    dependencies
-        .into_iter()
-        .filter_map(|(name, version)| match version {
-            toml::Value::String(version) => Some((name, version)),
-            _ => None,
-        })
-        .collect()
+	let CargoToml { dependencies } = toml::from_str(CARGO_TOML).unwrap();
+	dependencies
+		.into_iter()
+		.filter_map(|(name, version)| match version {
+			toml::Value::String(version) => Some((name, version)),
+			_ => None,
+		})
+		.collect()
 });
 
 #[derive(Deserialize)]
 struct TextQuery {
-    text: String,
+	text: String,
 }
 
 #[derive(Serialize)]
 struct Response {
-    name: &'static str,
-    version: String,
-    html: String,
+	name: &'static str,
+	version: String,
+	html: String,
 }
 
 #[derive(Serialize)]
 #[serde(rename_all = "PascalCase")]
 struct RegistryEntry {
-    lang: &'static str,
-    name: &'static str,
-    url: &'static str,
-    common_mark: &'static str,
-    repo: &'static str,
+	lang: &'static str,
+	name: &'static str,
+	url: &'static str,
+	common_mark: &'static str,
+	repo: &'static str,
 }
 
 #[derive(Serialize)]
 struct About {
-    about: &'static str,
-    version: &'static str,
-    babelmark: &'static str,
-    repo: &'static str,
-    registry: &'static str,
-    crates: Vec<Crate>,
+	about: &'static str,
+	version: &'static str,
+	babelmark: &'static str,
+	repo: &'static str,
+	registry: &'static str,
+	crates: Vec<Crate>,
 }
 
 #[derive(Serialize)]
 struct Crate {
-    name: &'static str,
-    version: String,
-    repo: &'static str,
+	name: &'static str,
+	version: String,
+	repo: &'static str,
 }
 
 macro_rules! renderers {
@@ -125,12 +125,12 @@ macro_rules! renderers {
 }
 
 renderers! {
-    "pulldown-cmark", pulldown, true, "https://github.com/pulldown-cmark/pulldown-cmark";
-    "markdown", markdown, true, "https://github.com/wooorm/markdown-rs";
-    "comrak", comrak, true, "https://github.com/kivikakk/comrak";
-    "markdown-it", markdown_it, true, "https://github.com/markdown-it-rust/markdown-it";
-    "markdowny", markdowny, false, "https://gitlab.com/bitpowder/indigo-ng";
-    "concisemark", concisemark, false, "https://github.com/ikey4u/concisemark";
-    "mdxt", mdxt, false, "https://github.com/baehyunsol/mdxt";
-    "mini_markdown", mini_markdown, false, "https://github.com/darakian/mini_markdown"
+	"pulldown-cmark", pulldown, true, "https://github.com/pulldown-cmark/pulldown-cmark";
+	"markdown", markdown, true, "https://github.com/wooorm/markdown-rs";
+	"comrak", comrak, true, "https://github.com/kivikakk/comrak";
+	"markdown-it", markdown_it, true, "https://github.com/markdown-it-rust/markdown-it";
+	"markdowny", markdowny, false, "https://gitlab.com/bitpowder/indigo-ng";
+	"concisemark", concisemark, false, "https://github.com/ikey4u/concisemark";
+	"mdxt", mdxt, false, "https://github.com/baehyunsol/mdxt";
+	"mini_markdown", mini_markdown, false, "https://github.com/darakian/mini_markdown"
 }
