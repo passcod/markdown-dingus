@@ -106,5 +106,6 @@ renderers! {
     "markdown", markdown, "0.3.0", true, "https://github.com/wooorm/markdown-rs";
     "comrak", comrak, "0.28.0", true, "https://github.com/kivikakk/comrak";
     "markdown-it", markdown_it, "0.6.1", true, "https://github.com/markdown-it-rust/markdown-it";
-    "markdowny", markdowny, "0.4.0", false, "https://gitlab.com/bitpowder/indigo-ng"
+    "markdowny", markdowny, "0.4.0", false, "https://gitlab.com/bitpowder/indigo-ng";
+    "concisemark", concisemark, "0.3.2", false, "https://github.com/ikey4u/concisemark"
 }

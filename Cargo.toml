@@ -6,6 +6,7 @@ edition = "2021"
 [dependencies]
 axum = "0.7.4"
 comrak = "0.28.0"
+concisemark = "0.3.2"
 markdown = "0.3.0"
 markdown-it = "0.6.1"
 markdowny = "0.4.0"
