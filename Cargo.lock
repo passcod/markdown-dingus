@@ -687,6 +687,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "expry"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "407f61e746dd5af18db07593cf0bca810faee15b2adc2b6b5d2d63c430533323"
+
+[[package]]
 name = "fancy-regex"
 version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1113,6 +1119,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "latex2mathml"
+version = "0.2.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "678cf5bdb3ba63a264e6e0c9eee36538ca1d2da0afa4dd801c1f96309e710765"
+
+[[package]]
 name = "lazy_static"
 version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1180,6 +1192,7 @@ dependencies = [
  "comrak",
  "markdown",
  "markdown-it",
+ "markdowny",
  "pulldown-cmark",
  "serde",
  "shuttle-axum",
@@ -1208,6 +1221,17 @@ dependencies = [
  "stacker",
  "syntect",
  "unicode-general-category",
+]
+
+[[package]]
+name = "markdowny"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7757ed94cee405ae03c4c27c72d3c779ba54b7da685a95e378f0c3fc1a1b38ca"
+dependencies = [
+ "expry",
+ "latex2mathml",
+ "syntect",
 ]
 
 [[package]]

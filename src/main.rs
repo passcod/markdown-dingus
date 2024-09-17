@@ -105,5 +105,6 @@ renderers! {
     "pulldown-cmark", pulldown, "0.12.1", true, "https://github.com/pulldown-cmark/pulldown-cmark";
     "markdown", markdown, "0.3.0", true, "https://github.com/wooorm/markdown-rs";
     "comrak", comrak, "0.28.0", true, "https://github.com/kivikakk/comrak";
-    "markdown-it", markdown_it, "0.6.1", true, "https://github.com/markdown-it-rust/markdown-it"
+    "markdown-it", markdown_it, "0.6.1", true, "https://github.com/markdown-it-rust/markdown-it";
+    "markdowny", markdowny, "0.4.0", false, "https://gitlab.com/bitpowder/indigo-ng"
 }
