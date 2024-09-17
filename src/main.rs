@@ -102,5 +102,6 @@ macro_rules! renderers {
 }
 
 renderers! {
-    "pulldown-cmark", pulldown, "0.12.1", true, "https://github.com/pulldown-cmark/pulldown-cmark"
+    "pulldown-cmark", pulldown, "0.12.1", true, "https://github.com/pulldown-cmark/pulldown-cmark";
+    "markdown", markdown, "0.3.0", false, "https://github.com/wooorm/markdown-rs"
 }
