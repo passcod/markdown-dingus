@@ -1247,6 +1247,7 @@ dependencies = [
  "markdown",
  "markdown-it",
  "markdowny",
+ "mdxt",
  "pulldown-cmark",
  "serde",
  "shuttle-axum",
@@ -1312,6 +1313,17 @@ dependencies = [
  "idna 0.3.0",
  "once_cell",
  "regex",
+]
+
+[[package]]
+name = "mdxt"
+version = "0.7.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d01cc1fc183f0ee6a2530ea0ff130ab34d1e99560aef26284f2da8999af7c383"
+dependencies = [
+ "lazy_static",
+ "syntect",
+ "yaml-rust",
 ]
 
 [[package]]

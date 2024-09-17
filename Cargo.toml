@@ -10,6 +10,7 @@ concisemark = "0.3.2"
 markdown = "0.3.0"
 markdown-it = "0.6.1"
 markdowny = "0.4.0"
+mdxt = "0.7.3"
 pulldown-cmark = "0.12.1"
 serde = { version = "1.0.210", features = ["derive"] }
 shuttle-axum = "0.47.0"
