@@ -8,12 +8,8 @@ on:
     paths-ignore:
       - README.md
 
-env:
-  CARGO_TERM_COLOR: always
-  CARGO_REGISTRIES_CRATES_IO_PROTOCOL: sparse
-
 jobs:
-  check:
+  deploy:
     runs-on: ubuntu-latest
     steps:
     - uses: shuttle-hq/deploy-action@main
