@@ -18,3 +18,5 @@ shuttle-axum = "0.47.0"
 shuttle-runtime = "0.47.0"
 tokio = "1.28.2"
 toml = "0.8.19"
+tower-http = { version = "0.5.2", features = ["trace"] }
+tracing = "0.1.40"

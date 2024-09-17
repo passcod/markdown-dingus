@@ -4,6 +4,8 @@ use axum::{extract::Query, response::Result, routing::get, Json, Router};
 use serde::{Deserialize, Serialize};
 use toml::Table;
 
+mod log;
+
 const CARGO_TOML: &str = include_str!("../Cargo.toml");
 
 #[derive(Deserialize)]
@@ -62,66 +64,66 @@ struct Crate {
 }
 
 macro_rules! renderers {
-    ($($apiname:expr, $modname:ident, $cmark:literal, $repo:literal);+) => {
-        $(
-            mod $modname;
-            async fn $modname(Query(TextQuery { text }): Query<TextQuery>) -> Result<Json<Response>> {
-                if text.is_empty() || text.len() > 1000 {
-                    return Err("text must be between 1 and 1000 characters".into());
-                }
+	($($apiname:expr, $modname:ident, $cmark:literal, $repo:literal);+) => {
+		$(
+			mod $modname;
+			async fn $modname(Query(TextQuery { text }): Query<TextQuery>) -> Result<Json<Response>> {
+				if text.is_empty() || text.len() > 1000 {
+					return Err("text must be between 1 and 1000 characters".into());
+				}
 
-                Ok(Json(Response {
-                    name: $apiname,
-                    version: VERSIONS.get($apiname).map(ToString::to_string).unwrap_or_default(),
-                    html: $modname::render(&text).await?,
-                }))
-            }
-        )+
+				Ok(Json(Response {
+					name: $apiname,
+					version: VERSIONS.get($apiname).map(ToString::to_string).unwrap_or_default(),
+					html: $modname::render(&text).await?,
+				}))
+			}
+		)+
 
-        async fn registry() -> Json<Vec<RegistryEntry>> {
-            Json(vec![
-                $(RegistryEntry {
-                    lang: "Rust",
-                    name: $apiname,
-                    url: concat!("https://markdown-dingus.shuttleapp.rs/", $apiname),
-                    common_mark: stringify!($cmark),
-                    repo: $repo,
-                }),+
-            ])
-        }
+		async fn registry() -> Json<Vec<RegistryEntry>> {
+			Json(vec![
+				$(RegistryEntry {
+					lang: "Rust",
+					name: $apiname,
+					url: concat!("https://markdown-dingus.shuttleapp.rs/", $apiname),
+					common_mark: stringify!($cmark),
+					repo: $repo,
+				}),+
+			])
+		}
 
-        async fn about() -> Json<About> {
-            Json(About {
-                about: "Comparison of Markdown Renderers for Rust crates, for the Babelmark v3 service",
-                version: env!("CARGO_PKG_VERSION"),
-                babelmark: "https://babelmark.github.io/",
-                repo: "https://github.com/passcod/markdown-dingus",
-                registry: "https://markdown-dingus.shuttleapp.rs/registry",
-                crates: vec![
-                    $(Crate {
-                        name: $apiname,
-                        version: VERSIONS.get($apiname).map(ToString::to_string).unwrap_or_default(),
-                        repo: $repo,
-                    }),+
-                ],
-            })
-        }
+		async fn about() -> Json<About> {
+			Json(About {
+				about: "Comparison of Markdown Renderers for Rust crates, for the Babelmark v3 service",
+				version: env!("CARGO_PKG_VERSION"),
+				babelmark: "https://babelmark.github.io/",
+				repo: "https://github.com/passcod/markdown-dingus",
+				registry: "https://markdown-dingus.shuttleapp.rs/registry",
+				crates: vec![
+					$(Crate {
+						name: $apiname,
+						version: VERSIONS.get($apiname).map(ToString::to_string).unwrap_or_default(),
+						repo: $repo,
+					}),+
+				],
+			})
+		}
 
-        #[shuttle_runtime::main]
-        async fn main() -> shuttle_axum::ShuttleAxum {
-            LazyLock::force(&VERSIONS);
+		#[shuttle_runtime::main]
+		async fn main() -> shuttle_axum::ShuttleAxum {
+			LazyLock::force(&VERSIONS);
 
-            let router = Router::new()
-                .route("/", get(about))
-                .route("/registry", get(registry))
-            $(
-                .route(concat!("/", $apiname), get($modname))
-            )+
-            ;
+			let router = Router::new()
+				.route("/", get(about))
+				.route("/registry", get(registry))
+			$(
+				.route(concat!("/", $apiname), get($modname))
+			)+
+			.layer(log::logging_layer());
 
-            Ok(router.into())
-        }
-    };
+			Ok(router.into())
+		}
+	};
 }
 
 renderers! {
