@@ -108,5 +108,6 @@ renderers! {
     "markdown-it", markdown_it, "0.6.1", true, "https://github.com/markdown-it-rust/markdown-it";
     "markdowny", markdowny, "0.4.0", false, "https://gitlab.com/bitpowder/indigo-ng";
     "concisemark", concisemark, "0.3.2", false, "https://github.com/ikey4u/concisemark";
-    "mdxt", mdxt, "0.7.3", false, "https://github.com/baehyunsol/mdxt"
+    "mdxt", mdxt, "0.7.3", false, "https://github.com/baehyunsol/mdxt";
+    "mini_markdown", mini_markdown, "0.3.5", false, "https://github.com/darakian/mini_markdown"
 }
