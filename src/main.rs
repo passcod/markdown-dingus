@@ -1,5 +1,26 @@
+use std::{collections::HashMap, sync::LazyLock};
+
 use axum::{extract::Query, response::Result, routing::get, Json, Router};
 use serde::{Deserialize, Serialize};
+use toml::Table;
+
+const CARGO_TOML: &str = include_str!("../Cargo.toml");
+
+#[derive(Deserialize)]
+struct CargoToml {
+    dependencies: Table,
+}
+
+static VERSIONS: LazyLock<HashMap<String, String>> = LazyLock::new(|| {
+    let CargoToml { dependencies } = toml::from_str(CARGO_TOML).unwrap();
+    dependencies
+        .into_iter()
+        .filter_map(|(name, version)| match version {
+            toml::Value::String(version) => Some((name, version)),
+            _ => None,
+        })
+        .collect()
+});
 
 #[derive(Deserialize)]
 struct TextQuery {
@@ -9,7 +30,7 @@ struct TextQuery {
 #[derive(Serialize)]
 struct Response {
     name: &'static str,
-    version: &'static str,
+    version: String,
     html: String,
 }
 
@@ -36,12 +57,12 @@ struct About {
 #[derive(Serialize)]
 struct Crate {
     name: &'static str,
-    version: &'static str,
+    version: String,
     repo: &'static str,
 }
 
 macro_rules! renderers {
-    ($($apiname:expr, $modname:ident, $version:literal, $cmark:literal, $repo:literal);+) => {
+    ($($apiname:expr, $modname:ident, $cmark:literal, $repo:literal);+) => {
         $(
             mod $modname;
             async fn $modname(Query(TextQuery { text }): Query<TextQuery>) -> Result<Json<Response>> {
@@ -51,7 +72,7 @@ macro_rules! renderers {
 
                 Ok(Json(Response {
                     name: $apiname,
-                    version: $version,
+                    version: VERSIONS.get($apiname).map(ToString::to_string).unwrap_or_default(),
                     html: $modname::render(&text).await?,
                 }))
             }
@@ -79,7 +100,7 @@ macro_rules! renderers {
                 crates: vec![
                     $(Crate {
                         name: $apiname,
-                        version: $version,
+                        version: VERSIONS.get($apiname).map(ToString::to_string).unwrap_or_default(),
                         repo: $repo,
                     }),+
                 ],
@@ -88,6 +109,8 @@ macro_rules! renderers {
 
         #[shuttle_runtime::main]
         async fn main() -> shuttle_axum::ShuttleAxum {
+            LazyLock::force(&VERSIONS);
+
             let router = Router::new()
                 .route("/", get(about))
                 .route("/registry", get(registry))
@@ -102,12 +125,12 @@ macro_rules! renderers {
 }
 
 renderers! {
-    "pulldown-cmark", pulldown, "0.12.1", true, "https://github.com/pulldown-cmark/pulldown-cmark";
-    "markdown", markdown, "0.3.0", true, "https://github.com/wooorm/markdown-rs";
-    "comrak", comrak, "0.28.0", true, "https://github.com/kivikakk/comrak";
-    "markdown-it", markdown_it, "0.6.1", true, "https://github.com/markdown-it-rust/markdown-it";
-    "markdowny", markdowny, "0.4.0", false, "https://gitlab.com/bitpowder/indigo-ng";
-    "concisemark", concisemark, "0.3.2", false, "https://github.com/ikey4u/concisemark";
-    "mdxt", mdxt, "0.7.3", false, "https://github.com/baehyunsol/mdxt";
-    "mini_markdown", mini_markdown, "0.3.5", false, "https://github.com/darakian/mini_markdown"
+    "pulldown-cmark", pulldown, true, "https://github.com/pulldown-cmark/pulldown-cmark";
+    "markdown", markdown, true, "https://github.com/wooorm/markdown-rs";
+    "comrak", comrak, true, "https://github.com/kivikakk/comrak";
+    "markdown-it", markdown_it, true, "https://github.com/markdown-it-rust/markdown-it";
+    "markdowny", markdowny, false, "https://gitlab.com/bitpowder/indigo-ng";
+    "concisemark", concisemark, false, "https://github.com/ikey4u/concisemark";
+    "mdxt", mdxt, false, "https://github.com/baehyunsol/mdxt";
+    "mini_markdown", mini_markdown, false, "https://github.com/darakian/mini_markdown"
 }

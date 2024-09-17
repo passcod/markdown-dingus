@@ -17,3 +17,4 @@ serde = { version = "1.0.210", features = ["derive"] }
 shuttle-axum = "0.47.0"
 shuttle-runtime = "0.47.0"
 tokio = "1.28.2"
+toml = "0.8.19"

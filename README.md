@@ -22,10 +22,15 @@ pub async fn render(input: &str) -> Result<String> {
 
 ```rust
 renderers! {
-    // name of the crate, name of the module (.rs file), version, implements commonmark?  crate repository
-    "project name",       module_name,                   "1.2.3", false,                  "https://github.com/example/repo"
+    // ...
+    "crate_name", module_name, false, "https://github.com/example/repo"
 }
 ```
+
+  - `crate_name` MUST be the exact name of the crate as per Cargo.toml
+  - `module_name` is the filename of the .rs created in step 3
+  - the boolean indicates commonmark compliance
+  - the URL must be to the repo of the markdown implementation
 
 5. Submit a pull request!
 6. Once approved and deployed, go to <https://markdown-dingus.shuttleapp.rs/registry">
