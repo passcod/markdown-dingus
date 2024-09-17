@@ -1,6 +1,6 @@
 # Babelmark Dingus server for Rust markdown crates
 
-Babelmark is a tool to compare the output of markdown implementations.
+[Babelmark](https://babelmark.github.io/) is a tool to compare the output of markdown implementations.
 
 This repository is the source of <https://markdown-dingus.shuttleapp.rs>, which provides Babelmark with various Rust-based markdown parsers/renderers.
 
