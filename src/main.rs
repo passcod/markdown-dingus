@@ -19,6 +19,13 @@ static VERSIONS: LazyLock<HashMap<String, String>> = LazyLock::new(|| {
 		.into_iter()
 		.filter_map(|(name, version)| match version {
 			toml::Value::String(version) => Some((name, version)),
+			toml::Value::Table(mut dep) => {
+				if let Some(toml::Value::String(version)) = dep.remove("version") {
+					Some((name, version))
+				} else {
+					None
+				}
+			}
 			_ => None,
 		})
 		.collect()
@@ -134,5 +141,6 @@ renderers! {
 	"markdowny", markdowny, false, "https://gitlab.com/bitpowder/indigo-ng";
 	"concisemark", concisemark, false, "https://github.com/ikey4u/concisemark";
 	"mdxt", mdxt, false, "https://github.com/baehyunsol/mdxt";
-	"mini_markdown", mini_markdown, false, "https://github.com/darakian/mini_markdown"
+	"mini_markdown", mini_markdown, false, "https://github.com/darakian/mini_markdown";
+	"kaffe", kaffe, false, "https://github.com/Schachte/kaffe-rs"
 }

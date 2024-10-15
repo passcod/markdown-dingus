@@ -7,6 +7,7 @@ edition = "2021"
 axum = "0.7.7"
 comrak = "0.29.0"
 concisemark = "0.4.2"
+kaffe = { git = "https://github.com/Schachte/kaffe-rs", version = "0.1.0", package = "ssr" }
 markdown = "0.3.0"
 markdown-it = "0.6.1"
 markdowny = "0.4.0"
