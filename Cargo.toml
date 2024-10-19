@@ -13,7 +13,7 @@ markdown-it = "0.6.1"
 markdowny = "0.4.0"
 mdxt = "0.7.3"
 mini_markdown = "0.3.5"
-pulldown-cmark = "0.12.1"
+pulldown-cmark = "0.12.2"
 serde = { version = "1.0.210", features = ["derive"] }
 shuttle-axum = "0.48.0"
 shuttle-runtime = "0.48.0"
