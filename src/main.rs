@@ -142,5 +142,5 @@ renderers! {
 	"concisemark", concisemark, false, "https://github.com/ikey4u/concisemark";
 	"mdxt", mdxt, false, "https://github.com/baehyunsol/mdxt";
 	"mini_markdown", mini_markdown, false, "https://github.com/darakian/mini_markdown";
-	"kaffe", kaffe, false, "https://github.com/Schachte/kaffe-rs"
+	//"kaffe", kaffe, false, "https://github.com/Schachte/kaffe-rs"
 }
