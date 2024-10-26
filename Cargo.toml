@@ -14,10 +14,10 @@ markdowny = "0.4.0"
 mdxt = "0.7.3"
 mini_markdown = "0.3.5"
 pulldown-cmark = "0.12.2"
-serde = { version = "1.0.210", features = ["derive"] }
+serde = { version = "1.0.213", features = ["derive"] }
 shuttle-axum = "0.48.0"
 shuttle-runtime = "0.48.0"
-tokio = "1.28.2"
+tokio = "1.41.0"
 toml = "0.8.19"
 tower-http = { version = "0.6.1", features = ["trace"] }
 tracing = "0.1.40"
