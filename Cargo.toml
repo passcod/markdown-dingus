@@ -4,8 +4,8 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-axum = "0.7.9"
-comrak = "0.32.0"
+axum = "0.8.1"
+comrak = "0.33.0"
 concisemark = "0.4.2"
 markdown = "0.3.0"
 markdown-it = "0.6.1"
