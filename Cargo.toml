@@ -4,10 +4,10 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-axum = "0.8.1"
-comrak = "0.37.0"
+axum = "0.8.3"
+comrak = "0.38.0"
 concisemark = "0.4.2"
-markdown = "0.3.0"
+markdown = "1.0.0"
 markdown-it = "0.6.1"
 markdowny = "0.5.0"
 mdxt = "0.7.3"
@@ -16,7 +16,7 @@ pulldown-cmark = "0.13.0"
 serde = { version = "1.0.217", features = ["derive"] }
 shuttle-axum = "0.53.0"
 shuttle-runtime = "0.53.0"
-tokio = "1.42.0"
-toml = "0.8.19"
+tokio = "1.44.2"
+toml = "0.8.21"
 tower-http = { version = "0.6.2", features = ["trace"] }
 tracing = "0.1.41"
