@@ -93,7 +93,7 @@ macro_rules! renderers {
 				$(RegistryEntry {
 					lang: "Rust",
 					name: $apiname,
-					url: concat!("https://markdown-dingus-ezo7.shuttle.app/", $apiname),
+					url: concat!("https://dingus.passcod.nz/", $apiname),
 					common_mark: stringify!($cmark),
 					repo: $repo,
 				}),+
@@ -106,7 +106,7 @@ macro_rules! renderers {
 				version: env!("CARGO_PKG_VERSION"),
 				babelmark: "https://babelmark.github.io/",
 				repo: "https://github.com/passcod/markdown-dingus",
-				registry: "https://markdown-dingus-ezo7.shuttle.app/registry",
+				registry: "https://dingus.passcod.nz/registry",
 				crates: vec![
 					$(Crate {
 						name: $apiname,
