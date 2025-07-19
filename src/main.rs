@@ -116,8 +116,8 @@ macro_rules! renderers {
 			})
 		}
 
-		#[shuttle_runtime::main]
-		async fn main() -> shuttle_axum::ShuttleAxum {
+		#[tokio::main]
+		async fn main() {
 			LazyLock::force(&VERSIONS);
 
 			let router = Router::new()
@@ -128,7 +128,10 @@ macro_rules! renderers {
 			)+
 			.layer(log::logging_layer());
 
-			Ok(router.into())
+			let listener = tokio::net::TcpListener::bind(
+				std::env::var("DINGUS_BIND_ADDRESS").unwrap_or("127.0.0.1:3000".into())
+			).await.unwrap();
+			axum::serve(listener, router).await.unwrap();
 		}
 	};
 }

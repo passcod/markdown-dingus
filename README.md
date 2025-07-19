@@ -2,7 +2,7 @@
 
 [Babelmark](https://babelmark.github.io/) is a tool to compare the output of markdown implementations.
 
-This repository is the source of <https://markdown-dingus-ezo7.shuttle.app>, which provides Babelmark with various Rust-based markdown parsers/renderers.
+This repository is the source of (TODO: new url), which provides Babelmark with various Rust-based markdown parsers/renderers.
 
 ## How to add an implementation
 

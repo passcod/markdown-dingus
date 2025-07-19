@@ -1,7 +1,7 @@
 [package]
 name = "markdown-dingus"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 [dependencies]
 axum = "0.8.1"
@@ -14,9 +14,7 @@ mdxt = "0.7.3"
 mini_markdown = "0.3.5"
 pulldown-cmark = "0.13.0"
 serde = { version = "1.0.217", features = ["derive"] }
-shuttle-axum = "0.53.0"
-shuttle-runtime = "0.53.0"
-tokio = "1.42.0"
+tokio = { version = "1.42.0", features = ["full"] }
 toml = "0.8.19"
 tower-http = { version = "0.6.2", features = ["trace"] }
 tracing = "0.1.41"
