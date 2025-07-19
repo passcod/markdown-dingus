@@ -3,6 +3,7 @@ use std::{collections::HashMap, sync::LazyLock};
 use axum::{extract::Query, response::Result, routing::get, Json, Router};
 use serde::{Deserialize, Serialize};
 use toml::Table;
+use tower_http::trace::TraceLayer;
 
 mod log;
 
@@ -118,9 +119,11 @@ macro_rules! renderers {
 
 		#[tokio::main]
 		async fn main() {
+			tracing_subscriber::fmt::init();
 			LazyLock::force(&VERSIONS);
 
 			let router = Router::new()
+				.layer(TraceLayer::new_for_http())
 				.route("/", get(about))
 				.route("/registry", get(registry))
 			$(
@@ -131,6 +134,7 @@ macro_rules! renderers {
 			let listener = tokio::net::TcpListener::bind(
 				std::env::var("DINGUS_BIND_ADDRESS").unwrap_or("127.0.0.1:3000".into())
 			).await.unwrap();
+			tracing::info!(addr=?listener.local_addr().unwrap(), "starting server");
 			axum::serve(listener, router).await.unwrap();
 		}
 	};
