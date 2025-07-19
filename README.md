@@ -2,7 +2,7 @@
 
 [Babelmark](https://babelmark.github.io/) is a tool to compare the output of markdown implementations.
 
-This repository is the source of (TODO: new url), which provides Babelmark with various Rust-based markdown parsers/renderers.
+This repository is the source of <https://dingus.passcod.nz>, which provides Babelmark with various Rust-based markdown parsers/renderers.
 
 ## How to add an implementation
 
@@ -33,5 +33,5 @@ renderers! {
   - the URL must be to the repo of the markdown implementation
 
 5. Submit a pull request!
-6. Once approved and deployed, go to <https://markdown-dingus-ezo7.shuttle.app/registry>
+6. Once approved and deployed, go to <https://dingus.passcod.nz/registry>
 7. Submit your crate's new entry in the registry to <https://github.com/babelmark/babelmark-registry>
