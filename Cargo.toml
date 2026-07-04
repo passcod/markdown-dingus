@@ -5,7 +5,7 @@ edition = "2024"
 
 [dependencies]
 axum = "0.8.8"
-comrak = "0.52.0"
+comrak = "0.53.0"
 concisemark = "0.4.2"
 markdown = "1.0.0"
 markdown-it = "0.6.1"
@@ -16,6 +16,6 @@ pulldown-cmark = "0.13.4"
 serde = { version = "1.0.217", features = ["derive"] }
 tokio = { version = "1.52.3", features = ["full"] }
 toml = "1.1.0"
-tower-http = { version = "0.6.11", features = ["trace"] }
+tower-http = { version = "0.7.0", features = ["trace"] }
 tracing = "0.1.44"
 tracing-subscriber = "0.3.23"
